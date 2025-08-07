@@ -16,7 +16,7 @@ class Shareholder(models.Model):
         for record in self:
             record.share_percent = (record.total_shares / total_shares_all * 100) if total_shares_all else 0.0
 
-    def _compute_dividend_received(self):
-        for record in self:
-            dividends = self.env['share.management.dividend'].search([('shareholder_id', '=', record.id)])
-            record.dividend_received = sum(dividends.mapped('amount'))
+def _compute_dividend_received(self):
+    for record in self:
+        dividends = self.env['share.management.dividend'].search([('shareholder_id', '=', record.id)])
+        record.dividend_received = sum(dividends.mapped('amount'))
