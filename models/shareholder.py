@@ -10,13 +10,15 @@ class Shareholder(models.Model):
     total_invested = fields.Float(string='Total Invested', default=0.0)
     share_percent = fields.Float(string='Share Percentage', compute='_compute_share_percent', store=True)
     dividend_received = fields.Float(string='Dividend Received', compute='_compute_dividend_received', store=True)
+    transaction_ids = fields.One2many('share.management.transaction', 'shareholder_id', string='Transactions')
+    dividend_ids = fields.One2many('share.management.dividend', 'shareholder_id', string='Dividends')
 
     def _compute_share_percent(self):
         total_shares_all = sum(self.env['share.management.shareholder'].search([]).mapped('total_shares'))
         for record in self:
             record.share_percent = (record.total_shares / total_shares_all * 100) if total_shares_all else 0.0
 
-def _compute_dividend_received(self):
-    for record in self:
-        dividends = self.env['share.management.dividend'].search([('shareholder_id', '=', record.id)])
-        record.dividend_received = sum(dividends.mapped('amount'))
+    def _compute_dividend_received(self):
+        for record in self:
+            dividends = self.env['share.management.dividend'].search([('shareholder_id', '=', record.id)])
+            record.dividend_received = sum(dividends.mapped('amount'))

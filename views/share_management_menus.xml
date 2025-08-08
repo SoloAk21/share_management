@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_share_management_root" name="Share Management" sequence="10"/>
+    <menuitem id="menu_shareholder" name="Shareholders" action="action_shareholder" parent="menu_share_management_root"/>
+    <menuitem id="menu_share_transactions" name="Transactions" action="action_share_transactions" parent="menu_share_management_root"/>
+    <menuitem id="menu_share_dividends" name="Dividends" action="action_share_dividends" parent="menu_share_management_root"/>
+</odoo>

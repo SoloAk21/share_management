@@ -1,1 +1,3 @@
-from . import shareholder, share_transaction, share_dividend
+from . import shareholder
+from . import share_transaction
+from . import share_dividend

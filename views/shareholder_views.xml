@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_shareholder_tree" model="ir.ui.view">
+        <field name="name">share.management.shareholder.tree</field>
+        <field name="model">share.management.shareholder</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="total_shares"/>
+                <field name="share_percent"/>
+                <field name="dividend_received"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_shareholder_form" model="ir.ui.view">
+        <field name="name">share.management.shareholder.form</field>
+        <field name="model">share.management.shareholder</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="%(action_share_transactions)d" string="Total Shares: " type="action" class="oe_stat_button" icon="fa-cubes">
+                        <field name="total_shares" widget="statinfo"/>
+                    </button>
+                    <button name="%(action_share_transactions)d" string="Share %: " type="action" class="oe_stat_button" icon="fa-pie-chart">
+                        <field name="share_percent" widget="statinfo"/>
+                    </button>
+                    <button name="%(action_share_dividends)d" string="Dividends: " type="action" class="oe_stat_button" icon="fa-money">
+                        <field name="dividend_received" widget="statinfo"/>
+                    </button>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="partner_id"/>
+                        <field name="total_shares"/>
+                        <field name="total_invested"/>
+                        <field name="share_percent"/>
+                        <field name="dividend_received"/>
+                    </group>
+                    <notebook>
+                        <page string="Transactions">
+                            <field name="transaction_ids" widget="one2many_list"/>
+                        </page>
+                        <page string="Dividends">
+                            <field name="dividend_ids" widget="one2many_list"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_shareholder" model="ir.actions.act_window">
+        <field name="name">Shareholders</field>
+        <field name="res_model">share.management.shareholder</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_shareholder_graph" model="ir.ui.view">
+        <field name="name">share.management.shareholder.graph</field>
+        <field name="model">share.management.shareholder</field>
+        <field name="arch" type="xml">
+            <graph type="pie">
+                <field name="name"/>
+                <field name="total_shares"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_shareholder_dashboard" model="ir.actions.act_window">
+        <field name="name">Share Dashboard</field>
+        <field name="res_model">share.management.shareholder</field>
+        <field name="view_mode">graph</field>
+    </record>
+
+    <menuitem id="menu_share_dashboard" name="Dashboard" action="action_shareholder_dashboard" parent="menu_share_management_root" sequence="1"/>
+</odoo>
